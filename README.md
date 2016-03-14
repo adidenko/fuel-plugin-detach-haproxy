@@ -1,0 +1,1 @@
+# fuel-plugin-detach-haproxy
