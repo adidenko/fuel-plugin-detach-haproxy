@@ -14,10 +14,9 @@
     - logging
     - netconfig
     - hosts
-    - firewal
+    - firewall
     - cluster-haproxy
     - openstack-haproxy-ceilometer
-    - openstack-haproxy-aodh
     - openstack-haproxy-nova
     - openstack-haproxy-sahara
     - openstack-haproxy-glance
@@ -33,3 +32,14 @@
     - openstack-haproxy-neutron
     - openstack-haproxy-mysqld
     - openstack-haproxy
+
+- id: standalone-haproxy-hiera
+  type: puppet
+  group: [standalone-haproxy]
+  requires: [deploy_start]
+  required_for: [hiera]
+  parameters:
+    puppet_manifest: puppet/manifests/add_to_hiera.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 120
+
