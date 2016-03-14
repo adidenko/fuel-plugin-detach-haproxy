@@ -1,0 +1,12 @@
+standalone-haproxy:
+  name: 'Haproxy'
+  description: 'Separated Haproxy from controller'
+  has_primary: false
+  public_ip_required: true
+  weight: 100
+  conflicts:
+    - controller
+    - compute
+  limits:
+    min: 0
+    max: 1

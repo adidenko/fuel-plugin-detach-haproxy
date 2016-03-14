@@ -1,1 +1,2 @@
-# fuel-plugin-detach-haproxy
+fuel-plugin-detach-haproxy
+==========================

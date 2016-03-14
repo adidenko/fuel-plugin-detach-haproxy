@@ -1,0 +1,7 @@
+attributes:
+  text:
+    value: "placeholder"
+    label: "Placeholder"
+    description: "Some text"
+    weight: 30
+    type: "text"

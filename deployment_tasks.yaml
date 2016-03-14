@@ -1,0 +1,35 @@
+- id: standalone-haproxy
+  type: group
+  role: [standalone-haproxy]
+  requires: [deploy_start]
+  required_for: [deploy_end, primary-controller]
+  parameters:
+    strategy:
+      type: parallel
+  tasks:
+    - hiera
+    - fuel_pkgs
+    - globals
+    - tools
+    - logging
+    - netconfig
+    - hosts
+    - firewal
+    - cluster-haproxy
+    - openstack-haproxy-ceilometer
+    - openstack-haproxy-aodh
+    - openstack-haproxy-nova
+    - openstack-haproxy-sahara
+    - openstack-haproxy-glance
+    - openstack-haproxy-heat
+    - openstack-haproxy-cinder
+    - openstack-haproxy-keystone
+    - openstack-haproxy-murano
+    - openstack-haproxy-horizon
+    - openstack-haproxy-stats
+    - openstack-haproxy-ironic
+    - openstack-haproxy-radosgw
+    - openstack-haproxy-swift
+    - openstack-haproxy-neutron
+    - openstack-haproxy-mysqld
+    - openstack-haproxy
