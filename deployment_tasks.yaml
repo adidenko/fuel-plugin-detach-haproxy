@@ -15,7 +15,6 @@
     - netconfig
     - hosts
     - firewall
-    - cluster-haproxy
     - openstack-haproxy-ceilometer
     - openstack-haproxy-nova
     - openstack-haproxy-sahara
@@ -32,12 +31,14 @@
     - openstack-haproxy-neutron
     - openstack-haproxy-mysqld
     - openstack-haproxy
+    - ssl-keys-saving
+    - ssl-add-trust-chain
 
 - id: standalone-haproxy-hiera
   type: puppet
-  group: [standalone-haproxy]
-  requires: [deploy_start]
-  required_for: [hiera]
+  role: '*'
+  requires: [pre_hiera_config]
+  required_for: [pre_deployment_end]
   parameters:
     puppet_manifest: puppet/manifests/add_to_hiera.pp
     puppet_modules: puppet/modules:/etc/puppet/modules

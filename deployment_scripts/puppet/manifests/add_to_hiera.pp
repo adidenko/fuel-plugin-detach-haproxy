@@ -14,6 +14,12 @@ $mgmt_ip = $mgmt[0]
 $public = values(get_node_to_ipaddr_map_by_network_role($haproxy_nodes, 'public/vip'))
 $public_ip = $public[0]
 
+if roles_include(['standalone-haproxy']){
+  $haproxy = true
+} else {
+  $haproxy = false
+}
+
 file {"/etc/hiera/plugins/${plugin_name}.yaml":
   ensure  => file,
     content => inline_template("# Created by puppet, please do not edit manually
@@ -21,8 +27,14 @@ network_metadata:
   vips:
     management:
       ipaddr: <%= @mgmt_ip %>
+      <% if @haproxy -%>
+      namespace: haproxy
+      <% end -%>
     public:
       ipaddr: <%= @public_ip %>
+      <% if @haproxy -%>
+      namespace: haproxy
+      <% end -%>
 ")
 }
 
