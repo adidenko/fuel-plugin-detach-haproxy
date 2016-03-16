@@ -44,3 +44,12 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 120
 
+- id: standalone-haproxy-mysqld-status
+  type: puppet
+  groups: [standalone-haproxy]
+  requires: [deploy_start, openstack-haproxy-mysqld]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/openstack-haproxy-mysqld-status.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 180
