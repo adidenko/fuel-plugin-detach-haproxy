@@ -27,14 +27,14 @@ network_metadata:
   vips:
     management:
       ipaddr: <%= @mgmt_ip %>
-      <% if @haproxy -%>
+<% if @haproxy -%>
       namespace: haproxy
-      <% end -%>
+<% end -%>
     public:
       ipaddr: <%= @public_ip %>
-      <% if @haproxy -%>
+<% if @haproxy -%>
       namespace: haproxy
-      <% end -%>
+<% end -%>
 ")
 }
 
