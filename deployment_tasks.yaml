@@ -44,12 +44,32 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 120
 
+- id: standalone-haproxy-haproxy
+  type: puppet
+  groups: [standalone-haproxy]
+  requires: [deploy_start, netconfig]
+  required_for: [deploy_end,openstack-haproxy-ceilometer, openstack-haproxy-cinder, openstack-haproxy-glance, openstack-haproxy-heat, openstack-haproxy-horizon, openstack-haproxy-keystone, openstack-haproxy-murano, openstack-haproxy-mysqld, openstack-haproxy-neutron, openstack-haproxy-nova, openstack-haproxy-radosgw, openstack-haproxy-sahara, openstack-haproxy-swift, openstack-haproxy-stats, openstack-haproxy-ironic]
+  parameters:
+    puppet_manifest: puppet/manifests/haproxy.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 180
+
 - id: standalone-haproxy-mysqld-status
   type: puppet
   groups: [standalone-haproxy]
-  requires: [deploy_start, openstack-haproxy-mysqld]
+  requires: [deploy_start, standalone-haproxy-haproxy]
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/openstack-haproxy-mysqld-status.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 180
+
+- id: standalone-haproxy-haproxy-restart
+  type: puppet
+  groups: [standalone-haproxy]
+  requires: [deploy_start, openstack-haproxy, standalone-haproxy-mysqld-status]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/restart_haproxy.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 180
