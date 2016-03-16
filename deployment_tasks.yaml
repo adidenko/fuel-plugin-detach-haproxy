@@ -14,7 +14,6 @@
     - logging
     - netconfig
     - hosts
-    - firewall
     - openstack-haproxy-ceilometer
     - openstack-haproxy-nova
     - openstack-haproxy-sahara
