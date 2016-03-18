@@ -1,5 +1,5 @@
 # Unique network role name
-- id: "detach_haproxy_vip"
+- id: "detach_haproxy/vip"
   # Role mapping to network
   default_mapping: "management"
   properties:
@@ -15,7 +15,7 @@
          node_roles:
            - "primary-standalone-haproxy"
            - "standalone-haproxy"
-- id: "detach_haproxy_public_vip"
+- id: "detach_haproxy_public/vip"
   # Role mapping to network
   default_mapping: "public"
   properties:

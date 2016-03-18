@@ -18,6 +18,12 @@ file {"/etc/hiera/plugins/${plugin_name}.yaml":
     content => inline_template("# Created by puppet, please do not edit manually
 network_metadata:
   vips:
+<% unless @haproxy -%>
+    haproxy:
+      namespace: false
+    haproxy_public:
+      namespace: false
+<% end -%>
     management:
       ipaddr: <%= @mgmt_ip %>
 <% if @haproxy -%>
@@ -35,6 +41,7 @@ network_metadata:
 <% if @haproxy -%>
 corosync_roles: [standalone-haproxy, primary-standalone-haproxy]
 <% end -%>
+run_ping_checker: false
 ")
 }
 
