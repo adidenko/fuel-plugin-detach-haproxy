@@ -3,9 +3,7 @@ fuel-plugin-detach-haproxy
 
 ## Purpose
 The main purpose of this plugin is to provide ability to deploy Load Balancer
-(Haproxy) separately from controllers and allow to test
-[External Load Balancer](https://github.com/openstack/fuel-plugin-external-lb)
-plugin in a fully automated manner.
+(Haproxy) separately from controllers.
 
 ## Compatibility
 
@@ -32,5 +30,5 @@ fpb --build .
 
 No need to configure plugin. Just assign `Haproxy` roles to needed nodes.
 If you're using it along with [External Load Balancer](https://github.com/openstack/fuel-plugin-external-lb)
-pluing for testing purposes, you aslo don't need to configure External Load
-Balancer plugin, it will be configured to use Haproxy node automaticaly.
+plugin for testing purposes, you also don't need to configure External Load
+Balancer plugin, it will be configured to use Haproxy nodes automaticaly.
