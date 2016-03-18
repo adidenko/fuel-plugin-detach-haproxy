@@ -2,19 +2,12 @@ notice('MODULAR: detach-haproxy/add_to_hiera.pp')
 
 $plugin_name      = 'detach_haproxy'
 $network_metadata = hiera_hash('network_metadata', {})
-$haproxy_nodes    = get_nodes_hash_by_roles($network_metadata, ['standalone-haproxy'])
+$haproxy_nodes    = get_nodes_hash_by_roles($network_metadata, ['primary-standalone-haproxy', 'standalone-haproxy'])
 
-if size($haproxy_nodes) != 1 {
-  fail('There should be only one standalone haproxy node')
-}
+$mgmt_ip   = $network_metadata['vips']['haproxy']['ipaddr']
+$public_ip = $network_metadata['vips']['haproxy_public']['ipaddr']
 
-$mgmt = values(get_node_to_ipaddr_map_by_network_role($haproxy_nodes, 'mgmt/vip'))
-$mgmt_ip = $mgmt[0]
-
-$public = values(get_node_to_ipaddr_map_by_network_role($haproxy_nodes, 'public/vip'))
-$public_ip = $public[0]
-
-if roles_include(['standalone-haproxy']){
+if roles_include(['primary-standalone-haproxy', 'standalone-haproxy']){
   $haproxy = true
 } else {
   $haproxy = false
@@ -29,11 +22,18 @@ network_metadata:
       ipaddr: <%= @mgmt_ip %>
 <% if @haproxy -%>
       namespace: haproxy
+<% else -%>
+      namespace: false
 <% end -%>
     public:
       ipaddr: <%= @public_ip %>
 <% if @haproxy -%>
       namespace: haproxy
+<% else -%>
+      namespace: false
+<% end -%>
+<% if @haproxy -%>
+corosync_roles: [standalone-haproxy, primary-standalone-haproxy]
 <% end -%>
 ")
 }

@@ -27,7 +27,6 @@ fpb --build .
 
 ## Known limitations
 * OSTF is not working
-* Only one Haproxy node per env is allowed
 
 ## Configuration
 
