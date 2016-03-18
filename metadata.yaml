@@ -1,6 +1,6 @@
 name: detach_haproxy
 title: Separate Haproxy from Controller
-version: 1.0.0
+version: 1.1.0
 description: Adds new role for separate Haproxy deployment
 fuel_version: ['8.0']
 licenses: ['Apache License, Version 2.0']
