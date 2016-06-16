@@ -1,5 +1,6 @@
 fuel-plugin-detach-haproxy
 ==========================
 
-*DEPRECATED*
+**DEPRECATED**
+
 Moved to https://github.com/openstack/fuel-plugin-detach-haproxy
